@@ -11,17 +11,13 @@ def call() {
                 sh 'pip install -r ./storage/requirements.txt'
             }
         }
-//         stage('Static Code Checking') {
-//             steps {
-//                 script {
-//                     sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
-//                     recordIssues(
-//                         tool: pyLint(pattern: 'pylint.log'),
-//                         unstableTotalHigh: 100,
-//                     )
-//                 }
-//             }
-//         }
+        stage('Static Code Checking') {
+            steps {
+                script {
+                    sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
+                }
+            }
+        }
 //         stage('Python Lint'){
 //             steps {
 //                 sh 'pylint-fail-under --fail_under 5.0 /storage/**.py'
