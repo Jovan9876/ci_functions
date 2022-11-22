@@ -14,16 +14,10 @@ def call() {
         stage('Static Code Checking') {
             steps {
                 script {
-//                     sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
                     sh 'pylint-fail-under --fail_under 5.0 **/*.py'
                 }
             }
         }
-//         stage('Python Lint'){
-//             steps {
-//                 sh 'pylint-fail-under --fail_under 5.0 /storage/**.py'
-//             }
-//         }
         stage('Test') {
             steps {
                 echo 'Testing..'
