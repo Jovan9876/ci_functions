@@ -14,7 +14,8 @@ def call() {
         stage('Static Code Checking') {
             steps {
                 script {
-                    sh 'find . -name \\*.py | xargs pylint -f parseable | tee pylint.log'
+                    sh 'find . -name \\*.py | xargs pylint -f parseable
+                    //| tee pylint.log'
                 }
             }
         }
