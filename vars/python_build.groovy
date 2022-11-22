@@ -4,12 +4,16 @@ def call() {
     stages {
         stage('Build') {
             steps {
-                sh 'ls'
+                sh 'pip install -r ./audit_log/requirements.txt'
+                sh 'pip install -r ./health/requirements.txt'
+                sh 'pip install -r ./processing/requirements.txt'
+                sh 'pip install -r ./reciever/requirements.txt'
+                sh 'pip install -r ./storage/requirements.txt'
             }
         }
         stage('Python Lint'){
             steps {
-                sh 'pylint-fail-under --fail_under 5.0 **.py'
+                sh 'pylint-fail-under --fail_under 5.0 /storage/**.py'
             }
         }
         stage('Test') {
