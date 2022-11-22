@@ -3,7 +3,7 @@ def call() {
       agent any
         stage('Build') {
             steps {
-                sh 'pip install -r requirements.txt'
+                echo 'Building...'
             }
         }
         stage('Python Lint'){
