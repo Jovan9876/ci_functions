@@ -22,13 +22,13 @@ def call() {
             steps {
                 withCredentials([string(credentialsId: 'DockerHub', variable: 'TOKEN')]) {
                     sh "docker login -u 'jovan9876' -p '$TOKEN' docker.io"
-                    sh "docker build -t reciever:latest -f reciever/ --tag reciever/reciever:reciever ."
+                    sh "docker build -t reciever:latest -f reciever/Dockerfile ."
                     sh "docker push jovan9876/reciever:reciever"
-                    sh "docker build -t storage:latest -f storage/ --tag storage/storage:storage ."
+                    sh "docker build -t storage:latest -f storage/Dockerfile ."
                     sh "docker push jovan9876/storage:storage"
-                    sh "docker build -t processing:latest -f processing/ --tag processing/processing:processing ."
+                    sh "docker build -t processing:latest -f processing/Dockerfile ."
                     sh "docker push jovan9876/processing:processing"
-                    sh "docker build -t audit_log:latest -f audit_log/ --tag audit_log/audit_log:audit_log ."
+                    sh "docker build -t audit_log:latest -f audit_log/Dockerfile ."
                     sh "docker push jovan9876/audit_log:audit_log"
                 }
             }
