@@ -49,13 +49,13 @@ def call() {
                 } 
             }
         }
-        stage('Deploy') {
-            steps {
-                sshagent(credentials: ['ACIT-3855-keys']) {
-                    sh "ssh -o StrictHostKeyChecking=no -l azureuser acit-3855.eastus.cloudapp.azure.com docker pull jovan9876/reciever && docker pull jovan9876/storage && docker pull jovan9876/processing && docker pull jovan9876/audit_log && docker-compose -f ACIT3855/deployment/docker-compose.yml up -d"
-                }
-            }   
-        }
+//         stage('Deploy') {
+//             steps {
+//                 sshagent(credentials: ['ACIT-3855-keys']) {
+//                     sh "ssh -o StrictHostKeyChecking=no -l azureuser acit-3855.eastus.cloudapp.azure.com docker pull jovan9876/reciever && docker pull jovan9876/storage && docker pull jovan9876/processing && docker pull jovan9876/audit_log && docker-compose -f ACIT3855/deployment/docker-compose.yml up -d"
+//                 }
+//             }   
+//         }
     }
     }
 }
