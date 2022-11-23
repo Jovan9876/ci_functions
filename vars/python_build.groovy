@@ -35,10 +35,10 @@ def call() {
 //         }
         stage('Zip Artifacts') {
             steps {
-                sh 'zip reciever.zip reciever/'
-                sh 'zip storage.zip storage/'
-                sh 'zip processing.zip processing/'
-                sh 'zip audit_log.zip audit_log/'
+                sh 'zip -r reciever.zip reciever/'
+                sh 'zip -r storage.zip storage/'
+                sh 'zip -r processing.zip processing/'
+                sh 'zip -r audit_log.zip audit_log/'
             }
             post {
                 always {
