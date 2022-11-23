@@ -20,6 +20,7 @@ def call() {
         }
         stage('Building') {
             steps {
+                sh 'ls'
                 withCredentials([string(credentialsId: 'DockerHub', variable: 'TOKEN')]) {
                     sh "docker login -u 'jovan9876' -p '$TOKEN' docker.io"
                     sh "docker build -t reciever:latest -f reciever/Dockerfile ."
