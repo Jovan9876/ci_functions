@@ -18,21 +18,38 @@ def call() {
                 }
             }
         }
-        stage('Building') {
+//         stage('Building') {
+//             steps {
+//                 withCredentials([string(credentialsId: 'DockerHub', variable: 'TOKEN')]) {
+//                     sh "docker login -u 'jovan9876' -p '$TOKEN' docker.io"
+//                     sh "docker build -t reciever:latest -f reciever.Dockerfile --tag jovan9876/reciever:reciever ."
+//                     sh "docker push jovan9876/reciever:reciever"
+//                     sh "docker build -t storage:latest -f storage.Dockerfile --tag jovan9876/storage:storage ."
+//                     sh "docker push jovan9876/storage:storage"
+//                     sh "docker build -t processing:latest -f processing.Dockerfile --tag jovan9876/processing:processing ."
+//                     sh "docker push jovan9876/processing:processing"
+//                     sh "docker build -t audit_log:latest -f audit_log.Dockerfile --tag jovan9876/audit_log:audit_log ."
+//                     sh "docker push jovan9876/audit_log:audit_log"
+//                 }
+//             }
+//         }
+        stage('Zip Artifacts') {
             steps {
-                withCredentials([string(credentialsId: 'DockerHub', variable: 'TOKEN')]) {
-                    sh "docker login -u 'jovan9876' -p '$TOKEN' docker.io"
-                    sh "docker build -t reciever:latest -f reciever.Dockerfile --tag jovan9876/reciever:reciever ."
-                    sh "docker push jovan9876/reciever:reciever"
-                    sh "docker build -t storage:latest -f storage.Dockerfile --tag jovan9876/storage:storage ."
-                    sh "docker push jovan9876/storage:storage"
-                    sh "docker build -t processing:latest -f processing.Dockerfile --tag jovan9876/processing:processing ."
-                    sh "docker push jovan9876/processing:processing"
-                    sh "docker build -t audit_log:latest -f audit_log.Dockerfile --tag jovan9876/audit_log:audit_log ."
-                    sh "docker push jovan9876/audit_log:audit_log"
-                }
+                sh 'zip reciever.zip reciever/'
+                sh 'zip storage.zip storage/'
+                sh 'zip processing.zip processing/'
+                sh 'zip audit_log.zip audit_log/'
+            }
+            post {
+                always {
+                    archiveArtifacts 'reciever.zip'
+                    archiveArtifacts 'storage.zip'
+                    archiveArtifacts 'processing.zip'
+                    archiveArtifacts 'audit_log.zip'
+                } 
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
