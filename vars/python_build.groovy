@@ -52,7 +52,7 @@ def call() {
         stage('Deploy') {
             steps {
                 sshagent(credentials: ['ACIT-3855-keys']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l azureuser acit-3855.eastus.cloudapp.azure.com ls docker pull jovan9876/reciever && docker-compose -f ACIT3855/deployment/docker-compose.yml up -d'
+                    sh 'ssh -o StrictHostKeyChecking=no -l azureuser acit-3855.eastus.cloudapp.azure.com docker pull jovan9876/reciever && docker-compose -f ACIT3855/deployment/docker-compose.yml up -d'
 //                     :latest;docker pull jovan9876/storage:latest;docker pull jovan9876/processing:latest;docker pull jovan9876/audit_log:latest;ACIT3855/deployment/docker-compose.yml up -d'
                 }
             }   
