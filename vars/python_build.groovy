@@ -53,11 +53,7 @@ def call() {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                    sshagent([string(credentialsId: '1cf1cd75-080c-40dc-a5fc-aea24284d4ee', variable: 'TOKEN')][]) {
-                    
-                        sh 'ssh -i $TOKEN azureuser@acit-3855.eastus.cloudapp.azure.com'
-                    
-                }
+
             }
         }
     }
