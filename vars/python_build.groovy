@@ -53,6 +53,11 @@ def call() {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                    sshagent(['1cf1cd75-080c-40dc-a5fc-aea24284d4ee']) {
+                    // 'myuid@' required for scp (this is from UID jenkins to UID myuid)
+                        sh 'ls'
+                    
+                }
             }
         }
     }
