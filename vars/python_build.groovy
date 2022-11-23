@@ -21,7 +21,7 @@ def call() {
         stage('Building') {
             steps {
                 withCredentials([string(credentialsId: 'DockerHub', variable: 'TOKEN')]) {
-                    sh "docker login -u '<username>' -p '$TOKEN' docker.io"
+                    sh "docker login -u 'jovan9876' -p '$TOKEN' docker.io"
                     sh "docker build -t reciever:latest -f reciever/ --tag reciever/reciever:reciever ."
                     sh "docker push jovan9876/reciever:reciever"
                     sh "docker build -t storage:latest -f storage/ --tag storage/storage:storage ."
