@@ -11,7 +11,7 @@ def call(dockerRepoName, imageName) {
         stage('Static Code Checking') {
             steps {
                 script {
-                    sh 'pylint-fail-under --fail_under 5.0 **/*.py'
+                    sh "pylint-fail-under --fail_under 5.0 ${dockerRepoName}/*.py"
                 }
             }
         }
