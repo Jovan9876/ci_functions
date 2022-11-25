@@ -1,4 +1,4 @@
-def call() {
+def call(dockerRepoName, imageName) {
     pipeline {
     agent any
     stages {
@@ -22,14 +22,8 @@ def call() {
             steps {
                 withCredentials([string(credentialsId: 'DockerHub', variable: 'TOKEN')]) {
                     sh "docker login -u 'jovan9876' -p '$TOKEN' docker.io"
-                    sh "docker build -t reciever:latest -f reciever.Dockerfile --tag jovan9876/reciever:latest ."
-                    sh "docker push jovan9876/reciever:latest"
-                    sh "docker build -t storage:latest -f storage.Dockerfile --tag jovan9876/storage:latest ."
-                    sh "docker push jovan9876/storage:latest"
-                    sh "docker build -t processing:latest -f processing.Dockerfile --tag jovan9876/processing:latest ."
-                    sh "docker push jovan9876/processing:latest"
-                    sh "docker build -t audit_log:latest -f audit_log.Dockerfile --tag jovan9876/audit_log:latest ."
-                    sh "docker push jovan9876/audit_log:latest"
+                    sh "docker build -t ${dockerRepoName}:latest -f ${dockerRepoName}.Dockerfile --tag jovan9876/${dockerRepoName}:${imageName} ."
+                    sh "docker push jovan9876/${dockerRepoName}:${imageName}"
                 }
             }
         }
