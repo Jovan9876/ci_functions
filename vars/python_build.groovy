@@ -4,11 +4,8 @@ def call(dockerRepoName, imageName) {
     stages {
         stage('Build') {
             steps {
-                sh 'pip install -r ./audit_log/requirements.txt'
-                sh 'pip install -r ./health/requirements.txt'
-                sh 'pip install -r ./processing/requirements.txt'
-                sh 'pip install -r ./reciever/requirements.txt'
-                sh 'pip install -r ./storage/requirements.txt'
+                sh 'ls'
+                sh "pip install -r ./${dockerRepoName}/requirements.txt"
             }
         }
         stage('Static Code Checking') {
@@ -29,17 +26,11 @@ def call(dockerRepoName, imageName) {
         }
         stage('Zip Artifacts') {
             steps {
-                sh 'zip -r reciever.zip reciever/'
-                sh 'zip -r storage.zip storage/'
-                sh 'zip -r processing.zip processing/'
-                sh 'zip -r audit_log.zip audit_log/'
+                sh "zip -r ${dockerRepoName}.zip ${dockerRepoName}/"
             }
             post {
                 always {
-                    archiveArtifacts 'reciever.zip'
-                    archiveArtifacts 'storage.zip'
-                    archiveArtifacts 'processing.zip'
-                    archiveArtifacts 'audit_log.zip'
+                    archiveArtifacts "${dockerRepoName}.zip"
                 } 
             }
         }
